@@ -47,3 +47,32 @@ return hold.reduce((a,b)=>a+b)
 
 let test1 ="Give me 5!";
 console.log(lettersToNumbers(test1))
+
+// refactor usin charCodeAt
+function lettersToNumbers(s) {
+  let sum = 0;
+
+  for (let char of s) {
+    let code = char.charCodeAt(0);
+
+
+    if (code >= 97 && code <= 122) {
+      sum += code - 96;
+    }
+
+
+    else if (code >= 65 && code <= 90) {
+      sum += (code - 64) * 2;
+    }
+
+
+    else if (code >= 48 && code <= 57) {
+      sum += code - 48;
+    }
+  }
+
+  return sum;
+}
+
+let test2 ="Hello World! 123";
+console.log(lettersToNumbers(test2))
