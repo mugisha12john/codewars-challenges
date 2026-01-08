@@ -1,7 +1,8 @@
 function luckCheck(ticket) {
-  if (/[A-Za-g]/gi.test(ticket)) {
-    throw Error("expected [Function] to throw an error");
+  if (!/^\d+$/.test(ticket)) {
+    throw new Error("error");
   }
+
   if (ticket.length % 2 === 0) {
     let a = ticket.length / 2;
     let leftSide = ticket
