@@ -1,32 +1,24 @@
 var encryptThis = function (text) {
-  let arr = text.split(" ");
-  let answer = [];
-  for (let element of arr) {
-    let result = "";
-    let first = 0;
-    if (Number(element[0])) {
-      first = element[0];
-    } else {
-      first = element.charCodeAt(0);
-    }
+  if (!text) return "";
 
-    result += first;
-    for (let i = 1; i < element.length; i++) {
-      let a = element[element.length - i];
-      result += a;
-    }
-    answer.push(result);
-  }
-  return answer.join(" ");
+  return text.split(" ").map(word => {
+    
+    const firstCode = word.charCodeAt(0);
+    
+    
+    if (word.length === 1) return firstCode.toString();
+    if (word.length === 2) return firstCode + word[1];
+    
+   
+    const secondChar = word[1];
+    const lastChar = word[word.length - 1];
+    const middle = word.slice(2, -1); 
+    
+    return firstCode + lastChar + middle + secondChar;
+  }).join(" ");
 };
 
-console.log(encryptThis("Hello"))
-console.log(encryptThis("hello world"));
-console.log(encryptThis("122cedo"))
-console.log(encryptThis("65"));
-// encryptThis("Hello") === "72olle"
-// encryptThis("good") === "103doo"
-// encryptThis("hello world") === "104olle 119drlo"
-// console.log(encryptThis("Why can we not all be like that wise old bird"))
-
-// "87yh 99na 119e 110to 97ll 98e 108eki 116tah 119esi 111dl 98dri")
+// Test cases
+console.log(encryptThis("Hello"));       // "72olle"
+console.log(encryptThis("good"));        // "103doo"
+console.log(encryptThis("hello world")); // "104olle 119drlo"
