@@ -4,9 +4,17 @@
 // Unfortunately for you, your drive is very bumpy! Given a string showing either 
 // flat road (_) or bumps (n). If you are able to reach home safely by 
 // encountering 15 bumps or less, return Woohoo!, otherwise return Car Dead
-export function bump(x: string){
-  return x.split('')
+export function bump(x: string):string{
+  let a = x.split('').filter(a=> a === '_').length
+  let b = x.split('').filter(a=> a==='n').length
+ if(b<=15){
+    return "Woohoo!"
+ }
+ else{
+    return "Car Dead"
+ }
 }
+
 console.log(bump("__nn_nnnn__n_n___n____nn__nnn"))
 // bump("__nn_nnnn__n_n___n____nn__nnn") =>  "Woohoo!"
 // bump("nnnnnnnnnnnnnnnnnnnnn"), "Car Dead")
