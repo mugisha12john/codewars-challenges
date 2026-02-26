@@ -5,6 +5,14 @@
 // ("Hello", 'o')  =>  1
 // ("Hello", 'l')  =>  2
 // ("", 'z')       =>  0
-export function strCount(str: string, letter: string): number {
-  return str.indexOf(letter)
+interface Obj{
+    [key:string]:number
 }
+export function strCount(str: string, letter: string):number {
+  let occ= str.split('').reduce<Obj>((a,b)=>{
+    a[b] =(a[b]||0)+1
+    return a
+  },{})
+   return letter in occ ? occ[letter] : 0
+}
+console.log(strCount('mugishaa','a'))
