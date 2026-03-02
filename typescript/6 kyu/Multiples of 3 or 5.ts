@@ -15,5 +15,3 @@ export class Challenge {
   }
 }
 
-let c = new Challenge()
-console.log(c.solution(10))
