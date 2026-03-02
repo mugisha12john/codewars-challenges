@@ -18,5 +18,4 @@ export function generateShape(int: number): string {
   }
   return result;
 }
-
 console.log(generateShape(2))
