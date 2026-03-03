@@ -13,7 +13,7 @@
 // # the bookseller's stocklist:
 // "ABART 20", "CDXEF 50", "BKWRK 25", "BTSQZ 89", "DRTYM 60"
 
-// # list of categories: 
+// # list of categories:
 // "A", "B", "C", "W"
 
 // # result:
@@ -24,3 +24,28 @@
 // category B: 114 books = 25 (BKWRK) + 89 (BTSQZ)
 // category C: 50 books (CDXEF)
 // category W: 0 books
+export const stockList = (listOfArt: string[], listOfCat: string[]) => {
+  if (listOfArt === null || listOfCat === null) return "";
+  let pairs: (string|number)[] = [];
+  for (let i = 0; i < listOfArt.length; i++) {
+    if (listOfCat.includes(listOfArt[i][0])) {
+      let booknumber = listOfArt[i].match(/\d+/gi);
+      let singeletter = listOfArt[i][0];
+      pairs.push([listOfArt[i][0], booknumber[0]]);
+    }
+  }
+  let obj:unknown = {};
+
+  pairs.forEach(([key, value]) => {
+    if (!obj[key]) {
+      obj[key] = [];
+    }
+    obj[key].push(Number(value));
+  });
+
+  return obj;
+};
+let b: string[] = ["BBAR 150", "CDXE 515", "BKWR 250", "BTSQ 890", "DRTY 600"];
+let c: string[] = ["A", "B", "C", "D"];
+// res = "(A : 0) - (B : 1290) - (C : 515) - (D : 600)";
+console.log(stockList(b, c));
