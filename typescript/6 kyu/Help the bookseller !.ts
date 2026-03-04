@@ -24,36 +24,55 @@
 // category B: 114 books = 25 (BKWRK) + 89 (BTSQZ)
 // category C: 50 books (CDXEF)
 // category W: 0 books
-export const stockList = (listOfArt: string[], listOfCat: string[]):string=> {
-  if (listOfArt === null || listOfCat === null) return "";
-  let pairs: (string|number)[] = [];
-  for (let i = 0; i < listOfArt.length; i++) {
-    if (listOfCat.includes(listOfArt[i][0])) {
-      let booknumber = listOfArt[i].match(/\d+/gi);
-      let singeletter = listOfArt[i][0];
-      pairs.push([listOfArt[i][0], booknumber[0]]);
+// export const stockList = (listOfArt: string[], listOfCat: string[]):string=> {
+//   if (listOfArt === null || listOfCat === null) return "";
+//   let pairs: (string|number)[] = [];
+//   for (let i = 0; i < listOfArt.length; i++) {
+//     if (listOfCat.includes(listOfArt[i][0])) {
+//       let booknumber = listOfArt[i].match(/\d+/gi);
+//       let singeletter = listOfArt[i][0];
+//       pairs.push([listOfArt[i][0], booknumber[0]]);
+//     }
+//   }
+//   let obj:unknown = {};
+//   pairs.forEach(([key, value]) => {
+//     if (!obj[key]) {
+//       obj[key] = [];
+//     }
+//     obj[key].push(Number(value));
+//   });
+//   for(let a in obj){
+//     obj[a] = obj[a].reduce((a,b)=>a+b,0)
+//   }
+// let result:string = ''
+//   for(let cat of listOfCat){
+
+//     if(cat in obj){
+//       result+=`- (${cat} : ${obj[cat]}) `
+//     }else{
+//       result+=`(${cat} : 0) `
+//     }
+//   }
+//   return result
+// };
+export const stockList = (listOfArt: string[], listOfCat: string[]): string => {
+  if (listOfArt.length === 0 || listOfCat.length === 0) return "";
+
+  const totals: Record<string, number> = {};
+
+  for (const cat of listOfCat) {
+    totals[cat] = 0;
+  }
+
+  for (const art of listOfArt) {
+    const category = art[0];
+    if (category in totals) {
+      const qty = parseInt(art.split(" ")[1]);
+      totals[category] += qty;
     }
   }
-  let obj:unknown = {};
-  pairs.forEach(([key, value]) => {
-    if (!obj[key]) {
-      obj[key] = [];
-    }
-    obj[key].push(Number(value));
-  });
-  for(let a in obj){
-    obj[a] = obj[a].reduce((a,b)=>a+b,0)
-  }
-let result:string = ''
-  for(let cat of listOfCat){
- 
-    if(cat in obj){
-      result+=`- (${cat} : ${obj[cat]}) `
-    }else{
-      result+=`(${cat} : 0) `
-    }
-  }
-  return result
+
+  return listOfCat.map((cat) => `(${cat} : ${totals[cat]})`).join(" - ");
 };
 let b: string[] = ["BBAR 150", "CDXE 515", "BKWR 250", "BTSQ 890", "DRTY 600"];
 let c: string[] = ["A", "B", "C", "D"];
