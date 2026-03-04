@@ -24,7 +24,7 @@
 // category B: 114 books = 25 (BKWRK) + 89 (BTSQZ)
 // category C: 50 books (CDXEF)
 // category W: 0 books
-export const stockList = (listOfArt: string[], listOfCat: string[]) => {
+export const stockList = (listOfArt: string[], listOfCat: string[]):string=> {
   if (listOfArt === null || listOfCat === null) return "";
   let pairs: (string|number)[] = [];
   for (let i = 0; i < listOfArt.length; i++) {
@@ -35,15 +35,25 @@ export const stockList = (listOfArt: string[], listOfCat: string[]) => {
     }
   }
   let obj:unknown = {};
-
   pairs.forEach(([key, value]) => {
     if (!obj[key]) {
       obj[key] = [];
     }
     obj[key].push(Number(value));
   });
-
-  return obj;
+  for(let a in obj){
+    obj[a] = obj[a].reduce((a,b)=>a+b,0)
+  }
+let result:string = ''
+  for(let cat of listOfCat){
+ 
+    if(cat in obj){
+      result+=`- (${cat} : ${obj[cat]}) `
+    }else{
+      result+=`(${cat} : 0) `
+    }
+  }
+  return result
 };
 let b: string[] = ["BBAR 150", "CDXE 515", "BKWR 250", "BTSQ 890", "DRTY 600"];
 let c: string[] = ["A", "B", "C", "D"];
