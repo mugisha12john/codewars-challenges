@@ -3,6 +3,7 @@
 // Note: you will always receive a valid array containing a random assortment of direction letters ('n', 's', 'e', or 'w' only). It will never give you an empty array (that's not a walk, that's standing still!).
 
 export function isValidWalk(walk: string[]) {
+   if(walk.length !== 10 || !walk) return false
    let north = walk.filter(path => path ==='n').length
    let south = walk.filter(path => path ==='s').length
    let west = walk.filter(path => path ==='w').length
