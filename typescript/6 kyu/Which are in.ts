@@ -19,10 +19,13 @@
 // In Shell bash a1 and a2 are strings. The return is a string where words are separated by commas.
 // Beware: In some languages r must be without duplicates.
 export function inArray(a1: string[], a2: string[]): string[] {
- return ['adfks','kigali']
+  return a1.filter((word) => a2.some((w) => w.includes(word))).sort();
 }
 
-let a1 = ["arp", "live", "strong"]
+let a1 = ["arp", "live", "strong"];
 
-let a2 = ["lively", "alive", "harp", "sharp", "armstrong"]
-console.log(inArray(a1,a2))
+let a2 = ["lively", "alive", "harp", "sharp", "armstrong"];
+let a4 = ["tarp", "mice", "bull"]
+let a5 = ["lively", "alive", "harp", "sharp", "armstrong"]
+console.log(inArray(a1, a2));
+console.log(inArray(a4,a5))
