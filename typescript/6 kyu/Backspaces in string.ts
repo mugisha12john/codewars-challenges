@@ -10,9 +10,8 @@
 export function cleanString(s: string):string {
 	let result:string[] = []
     for(let i=0;i<s.length;i++){
-		let index = i-1
 		if(s[i] === '#'){
-			result.pop(index)
+			result.pop()
 		}else{
 		result.push(`${s[i]}`)
 		}
