@@ -8,6 +8,13 @@
 // 0, 0, 0       --> "000000"
 // 148, 0, 211   --> "9400D3"
 export function rgb(r: number, g: number, b: number): string {
-  return `${r.toString(16).toLocaleUpperCase()}${g.toString(16).toLocaleUpperCase()}${b.toString(16).toLocaleUpperCase()}`;
+  let hex = (value: number):string => {
+    if (value < 0) value = 0;
+    if (value > 255) value = 255;
+    return value.toString(16).padStart(2,"0").toUpperCase()
+  }
+  return `${hex(r)}${hex(g)}${hex(b)}`
 }
-console.log(rgb(255, 245, 123));
+console.log(rgb(30, 12, -5));
+// console.log(rgb(15, 129, 285))
+// console.log(rgb(90, 339, 98))
