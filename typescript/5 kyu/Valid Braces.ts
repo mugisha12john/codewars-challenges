@@ -1,24 +1,23 @@
 export function validBraces(braces: string) {
   if (!/[(){}\[\]]/gim.test(braces)) return false;
-  let match = []
-  let pair = {
-    '[': ']',
-    '(':')',
-    '{':'}'
-  }
+  let match = [];
+  const pair:Record<string, string> = {
+    ")": "(",
+    "]": "[",
+    "}": "{",
+  };
 
-  // for(let str in braces){
-  //   if('({['.includes(str)){
-  //       match.push(str)
-  //   }
-  //   else{
-  //       if(!match || match[-1] !== pair[str])
-  //   }
-  // }
-//   return braces.split('').reduce<Record<string,number>>((a,b)=> {
-//     a[b] = (a[b] || 0) +1
-//     return a
-//   },{})
+  for (let str of braces) {
+    if ("({[".includes(str)) {
+      match.push(str);
+    } else {
+      if (!match.length || match[match.length -1] !== pair[str]) {
+        return false;
+      }
+      match.pop();
+    }
+  }
+  return match.length === 0;
 }
 // "(){}[]"   =>  True
 // "([{}])"   =>  True
@@ -26,4 +25,4 @@ export function validBraces(braces: string) {
 // "[(])"     =>  False
 // "[({})](]" =>  False
 console.log(validBraces("adf"));
-console.log(validBraces("(){}[]"))
+console.log(validBraces("(){}[]"));
