@@ -22,11 +22,11 @@ export function toBase64(data: Uint8Array) {
     const chunk = data.slice(i, i + 3);
     binary.push(chunk);
   }
-//   const binaryArray = binary.map((group) =>
-//     group.map((num) => num.toString(2).padStart(8, "0")).join(""),
-//   );
+  const binaryArray = binary.map((group) =>
+    group.map((num) => num.toString(2).padStart(8, "0")).join(""),
+  );
 
-//   console.log(binaryArray);
+  console.log(binaryArray);
 }
 
 //out put =   dGhpcyBpcyBhIHRlc3Qh
