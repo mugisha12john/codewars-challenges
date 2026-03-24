@@ -1,20 +1,41 @@
-// Your task is to sort a given string. Each word in the string will contain a single number. 
+// Your task is to sort a given string. Each word in the string will contain a single number.
 // This number is the position the word should have in the result.
 
 // Note: Numbers can be from 1 to 9. So 1 will be the first word (not 0).
 
-// If the input string is empty, return an empty string. The words in the input String will only contain 
+// If the input string is empty, return an empty string. The words in the input String will only contain
 // valid consecutive numbers.
 
 // Examples
 // "is2 Thi1s T4est 3a"  -->  "Thi1s is2 3a T4est"
 // "4of Fo1r pe6ople g3ood th5e the2"  -->  "Fo1r the2 g3ood 4of th5e pe6ople"
 // ""  -->  ""
-export function order(words:string){
-    let arr = words.split(' ').filter(item => /[1-9]/gi.test(item))
-    let sorted =arr.map(item=> item.match(/[1-9]/gi)).flat(1).sort()
+// export function order(words:string){
+//     let arr = words.split(' ').filter(item => /[1-9]/gi.test(item) || [])
+//     let sorted =arr.map(item=> item.match(/[1-9]/gi)) .filter((x): x is string[] => x !== null).flat(1).sort()
 
+// let result = sorted.map((item, i) => {
+//   // check if the current word contains the digit
+//   if (arr[i].includes(item)) {
+//     // replace the digit with the actual word (without number)
+//     let replaced = arr[i].replace(/[1-9]/g, '');
+//     console.log(`${item} -> ${replaced}`);
+//     return replaced;
+//   }
+// });
 
-  return sorted
+// console.log(result)
+// }
+export function order(words: string) {
+  return words
+    .split(" ")
+    .sort((a, b) => {
+      const numA = a.match(/[1-9]/)?.[0];
+      const numB = b.match(/[1-9]/)?.[0];
+      return Number(numA) - Number(numB);
+    })
+    .filter((item) => /[1-9]/gi.test(item))
+    .join(" ");
 }
-console.log(order("is2 Thi1s T4est 3a 0jdk"))
+
+console.log(order("is2 Thi1s T4est 3a "));
