@@ -7,7 +7,7 @@
 // sz is <= 0 or if str == "" return ""
 // sz is greater (>) than the length of str it is impossible to take a chunk of size sz hence return "".
 // Examples:
-// ("123456987654", 6) --> "234561876549"
+// ("12345698765arr4", 6) --> "234561876549"
 // ("123456987653", 6) --> "234561356789"
 // ("66443875", 4) --> "44668753"
 // ("66443875", 8) --> "64438756"
@@ -18,13 +18,27 @@
 // ("563000655734469485", 4) --> "0365065073456944"
 // Example of a string rotated to the left by one position:
 // s = "123456" gives "234561".
-export function revRot(s: string, sz: number) {
+export function revRot(s: string, sz: number): string {
+  if (sz <= 0 || s === "" || sz > s.length) return "";
+
   let arr: string[] = [];
-  if (sz <= 0 || s === "") return "";
-  for (let i = 0; i < s.length; i += sz) {
+
+  
+  for (let i = 0; i + sz <= s.length; i += sz) {
     arr.push(s.slice(i, i + sz));
   }
-  return arr;
+
+  return arr.map(chunk => {
+    const sum = chunk
+      .split('')
+      .reduce((a, b) => a + Number(b), 0);
+
+    if (sum % 2 === 0) {
+      return chunk.split('').reverse().join('');
+    } else {
+      return chunk.slice(1) + chunk[0]; 
+    }
+  }).join('');
 }
 console.log(revRot("123456987654", 6));
 console.log(revRot("66443875", 4));
