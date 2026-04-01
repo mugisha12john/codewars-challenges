@@ -10,8 +10,40 @@
 
 // You may assume that there won't be exceptional situations (like stack underflow or division by zero).
 
-
-
 export function calc(expr: string): number {
-  return 0
+  if (expr === "") return 0;
+
+  let result: number[] = [];
+
+  for (let token of expr.split(" ")) {
+    if (!isNaN(Number(token))) {
+      result.push(Number(token));
+    } else {
+      let a = result.pop()!;
+      let b = result.pop()!;
+      let res: number;
+
+      switch (token) {
+        case "+":
+          res = b + a;
+          break;
+        case "-":
+          res = b - a;
+          break;
+        case "*":
+          res = b * a;
+          break;
+        case "/":
+          res = b / a;
+          break;
+        default:
+          res = 0;
+      }
+
+      result.push(res);
+    }
+  }
+
+  return result[0];
 }
+console.log(calc("5 1 2 + 4 * + 3 -"));
