@@ -25,7 +25,24 @@
 
 // ##Hint Take a sheet of paper and with a bit of algebra try to write the product of squared numbers in another way.
 
-export const prod2sum = (a:number, b:number, c:number, d:number):number[][] => {
-  // your code
-  return []
-}
+export const prod2sum = (
+  a: number,
+  b: number,
+  c: number,
+  d: number,
+):number[][] => {
+  const pair1 = [Math.abs(a * c - b * d), Math.abs(a * d + b * c)].sort((a,b)=>a-b);
+  const pair2 = [Math.abs(a * c + b * d), Math.abs(a * d - b * c)].sort((a,b)=>a-b);
+//   const left = Math.pow(a, 2) + Math.pow(b, 2);
+//   const right = Math.pow(c, 2) + Math.pow(d, 2);
+//   const sqrt = Math.floor(Math.sqrt(left * right));
+//   let lastNumber = Math.round((left * right - Math.pow(sqrt, 2)) / 2);
+ const result: number[][] = [pair1];
+  if (pair1[0] !== pair2[0] || pair1[1] !== pair2[1]) {
+    result.push(pair2);
+  }
+  return result
+};
+console.log(prod2sum(2, 3, 4, 5));
+console.log(prod2sum(1, 2, 2, 3));
+console.log(prod2sum(1, 1, 3, 5));
