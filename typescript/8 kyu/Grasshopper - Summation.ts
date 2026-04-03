@@ -4,3 +4,11 @@
 
 // 2 -> 3 (1 + 2)
 // 8 -> 36 (1 + 2 + 3 + 4 + 5 + 6 + 7 + 8)
+export const summation = (num:number)=> { 
+ let sum:number = 0
+ for(let i=0;i<=num;i++){
+    sum+=i
+ }
+ return sum
+}
+console.log(summation(2))
