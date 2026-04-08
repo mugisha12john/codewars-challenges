@@ -4,7 +4,7 @@
 
 // The input string will only consist of lower case letters and/or spaces.
 export class Kata {
-   getCount(str: string):number {
+   static getCount(str: string):number {
     let vowel = ['a','i','o','u','e']
     let count =0
     for(let i=0;i<str.length;i++){
@@ -17,4 +17,4 @@ export class Kata {
 }
 // Kata.getCount("abracadabra"), 5)
 const k = new Kata()
-console.log(k.getCount('abracadabra'))
+// console.log(k.getCount('abracadabra'))
