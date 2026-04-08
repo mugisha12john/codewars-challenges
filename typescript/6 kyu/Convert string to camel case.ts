@@ -7,9 +7,10 @@
 
 // "The_Stealth-Warrior" gets converted to "TheStealthWarrior"
 export function toCamelCase(str:string):string{
-    return str.split(/[-_]/).map(word=>{
+    const camel=  str.split(/[-_]/).slice(1).map(word=>{
         return word[0].toLocaleUpperCase() + word.slice(1)
-    }).join('')
+    })
+    return str.split(/[-_]/)[0]+ camel.join('')
 }
 console.log(toCamelCase("the-stealth-warrior"))
 console.log(toCamelCase("The_Stealth_Warrior"))
