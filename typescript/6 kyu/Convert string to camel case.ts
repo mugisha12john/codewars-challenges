@@ -6,3 +6,11 @@
 // "The_Stealth_Warrior" gets converted to "TheStealthWarrior"
 
 // "The_Stealth-Warrior" gets converted to "TheStealthWarrior"
+export function toCamelCase(str:string):string{
+    return str.split(/[-_]/).map(word=>{
+        return word[0].toLocaleUpperCase() + word.slice(1)
+    }).join('')
+}
+console.log(toCamelCase("the-stealth-warrior"))
+console.log(toCamelCase("The_Stealth_Warrior"))
+console.log(toCamelCase("The_Stealth-Warrior"))
