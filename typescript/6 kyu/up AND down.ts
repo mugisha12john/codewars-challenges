@@ -32,5 +32,23 @@
 // Process: go from left to right, move only consecutive strings when needed.
 // For the first fixed tests the needed number of moves to get property (P) is given as a comment so that you can know if your process follows the rule.
 
-export function arrange(strng: string): string {
+export function arrange(strng: string) {
+  let word = strng.split(" ");
+  for (let i = 0; i < word.length - 1; i++) {
+    let current = word[i].length;
+    let next = word[i + 1].length;
+    if (i % 2 === 0) {
+      if (current > next) {
+        [word[i], word[i + 1]] = [word[i + 1], word[i]];
+      }
+    } else {
+      if (current < next) {
+        [word[i], word[i + 1]] = [word[i + 1], word[i]];
+      }
+    }
+  }
+  return word.map((item,i)=> {
+    return i%2 !== 0 ? item.toUpperCase() : item.toLowerCase()
+  }).join(' ')
 }
+console.log(arrange("after be arrived two My so"));
