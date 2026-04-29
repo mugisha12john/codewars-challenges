@@ -12,7 +12,25 @@
 // Have fun coding it and please don't forget to vote and rank this kata! :-)
 
 // I have also created other katas. Take a look if you enjoyed this kata!
-export function findMissingLetter(array: [string, string, ...string[]]) : string {
-    return '';
+export function findMissingLetter(array: [string, string, ...string[]]) {
+  const lower = [..."abcdefghijklmnopqrstuvwxyz"];
+  const upper = [..."ABCDEFGHIJKLMNOPQRSTUVWXYZ"];
+  const isLower = array.every((a) => a === a.toLowerCase());
+  const alphabet = isLower ? lower : upper;
+
+console.log(alphabet)
+  const startIndex = alphabet.indexOf(array[0]);
+
+  for(let i =startIndex ;i<=array.length;i++){
+    if(array[i] !== alphabet[startIndex+i]){
+    
+      return alphabet[startIndex+i]
+    }
+  }
+  // return alphabet[startIndex + array.length];
+
 }
 
+// console.log(findMissingLetter(["a", "b", "c", "d", "f"]));
+// console.log(findMissingLetter(["e", "f", "g", "h", "j", "k"]));
+console.log(findMissingLetter(['O','Q','R','S']))
