@@ -11,16 +11,26 @@
 // Code Examples
 
 //     prefill(3,1) --> [1,1,1]
-    
+
 //     prefill(2,"abc") --> ['abc','abc']
-    
+
 //     prefill("1", 1) --> [1]
-    
+
 //     prefill(3, prefill(2,'2d'))
 //       --> [['2d','2d'],['2d','2d'],['2d','2d']]
-      
+
 //     prefill("xyz", 1)
 //       --> throws TypeError with message "xyz is invalid"
 function prefill(n, v) {
-  
+  if (v === "") return [];
+  if (n === 0) return [];
+  if(/\D+/.test(n)){
+    return `${n} is invalid`;
+
+  }
+  return Array(n).fill(v);
 }
+console.log(prefill("xyz", 1));
+console.log(prefill(2, "abc"));
+console.log(prefill(3, 1));
+console.log(prefill(true,3))
