@@ -21,14 +21,34 @@
 
 //     prefill("xyz", 1)
 //       --> throws TypeError with message "xyz is invalid"
-function prefill(n, v) {
-  if (v === "") return [];
-  if (n === 0) return [];
-  if(/\D+/.test(n)){
-    return `${n} is invalid`;
+// function prefill(n, v) {
+//   if (v === "") return [];
+//   if (n === 0) return [];
+//   if(/\D+/.test(n)){
+//     return `${n} is invalid`;
 
+//   }
+//   return Array(n).fill(v);
+// }
+
+function prefill(n, v) {
+  // Convert n to number if it's a string
+  const num = Number(n);
+
+  // Validate n
+  if (
+    (typeof n !== "number" && typeof n !== "string") ||
+    !Number.isInteger(num) ||
+    num < 0
+  ) {
+    throw new TypeError(`${n} is invalid`);
   }
-  return Array(n).fill(v);
+
+  // If n is 0 → empty array
+  if (num === 0) return [];
+
+  // Fill array (v can be undefined if omitted)
+  return Array(num).fill(v);
 }
 console.log(prefill("xyz", 1));
 console.log(prefill(2, "abc"));
