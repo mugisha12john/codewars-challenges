@@ -107,22 +107,27 @@ export function sendMessage(message: string): string {
     "=": "****",
   };
 
-   let result = '';
-  let currentCase: 'lower' | 'upper' = 'lower';
+  let result = "";
+  let currentCase: "lower" | "upper" = "lower";
   let previousKey: string | null = null;
 
   for (let char of message) {
-    let output = '';
-
-    //  Numbers
+    let output = "";
     if (/[0-9]/.test(char)) {
       output = `${char}-`;
-      previousKey = null; 
+      previousKey = null;
       result += output;
       continue;
     }
   }
-  return message;
+  for (let a of message) {
+    if (a.toLocaleUpperCase() === a) {
+      result += `#`;
+    }
+    result += `${keyMap[a]}`;
+  }
+  return result;
 }
-
-console.log(sendMessage('5-5-5-'))
+console.log(sendMessage("Hey"));
+//4433999
+// console.log(sendMessage('5-5-5-'))
