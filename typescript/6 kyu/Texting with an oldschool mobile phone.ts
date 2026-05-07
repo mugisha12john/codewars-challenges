@@ -68,43 +68,19 @@
 // All inputs will be valid strings and only consist of characters from the key layout table.
 export function sendMessage(message: string): string {
   const keyMap: Record<string, string> = {
-    a: "2",
-    b: "22",
-    c: "222",
-    d: "3",
-    e: "33",
-    f: "333",
-    g: "4",
-    h: "44",
-    i: "444",
-    j: "5",
-    k: "55",
-    l: "555",
-    m: "6",
-    n: "66",
-    o: "666",
-    p: "7",
-    q: "77",
-    r: "777",
-    s: "7777",
-    t: "8",
-    u: "88",
-    v: "888",
-    w: "9",
-    x: "99",
-    y: "999",
-    z: "9999",
+    a: "2", b: "22", c: "222",
+    d: "3", e: "33", f: "333",
+    g: "4", h: "44", i: "444",
+    j: "5", k: "55", l: "555",
+    m: "6", n: "66", o: "666",
+    p: "7", q: "77", r: "777", s: "7777",
+    t: "8", u: "88", v: "888",
+    w: "9", x: "99", y: "999", z: "9999",
 
     " ": "0",
 
-    ".": "1",
-    ",": "11",
-    "?": "111",
-    "!": "1111",
-    "'": "*",
-    "-": "**",
-    "+": "***",
-    "=": "****",
+    ".": "1", ",": "11", "?": "111", "!": "1111",
+    "'": "*", "-": "**", "+": "***", "=": "****"
   };
 
   let result = "";
@@ -113,19 +89,44 @@ export function sendMessage(message: string): string {
 
   for (let char of message) {
     let output = "";
+
+    // 👉 Handle numbers (hold)
     if (/[0-9]/.test(char)) {
       output = `${char}-`;
-      previousKey = null;
+      previousKey = null; // no wait needed after hold
       result += output;
       continue;
     }
-  }
-  for (let a of message) {
-    if (a.toLocaleUpperCase() === a) {
-      result += `#`;
+
+    // 👉 Handle case switching (letters only)
+    if (/[a-zA-Z]/.test(char)) {
+      const isUpper = char === char.toUpperCase();
+
+      if (isUpper && currentCase === "lower") {
+        result += "#";
+        currentCase = "upper";
+        previousKey = null;
+      } else if (!isUpper && currentCase === "upper") {
+        
+        currentCase = "lower";
+        previousKey = null;
+      }
     }
-    result += `${keyMap[a]}`;
+
+    const lowerChar = char.toLowerCase();
+    output = keyMap[lowerChar];
+
+    const currentKey = output[0];
+
+    // 👉 Wait if same key
+    if (previousKey === currentKey) {
+      result += " ";
+    }
+
+    result += output;
+    previousKey = currentKey;
   }
+
   return result;
 }
 console.log(sendMessage("Hey"));
