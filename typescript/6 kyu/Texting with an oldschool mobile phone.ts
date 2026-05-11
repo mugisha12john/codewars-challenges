@@ -89,25 +89,19 @@ export function sendMessage(message: string): string {
 
   for (let char of message) {
     let output = "";
-
-    // 👉 Handle numbers (hold)
     if (/[0-9]/.test(char)) {
       output = `${char}-`;
-      previousKey = null; // no wait needed after hold
+      previousKey = null; 
       result += output;
       continue;
     }
-
-    // 👉 Handle case switching (letters only)
     if (/[a-zA-Z]/.test(char)) {
       const isUpper = char === char.toUpperCase();
-
       if (isUpper && currentCase === "lower") {
         result += "#";
         currentCase = "upper";
         previousKey = null;
       } else if (!isUpper && currentCase === "upper") {
-        
         currentCase = "lower";
         previousKey = null;
       }
@@ -118,7 +112,6 @@ export function sendMessage(message: string): string {
 
     const currentKey = output[0];
 
-    // 👉 Wait if same key
     if (previousKey === currentKey) {
       result += " ";
     }
@@ -129,6 +122,6 @@ export function sendMessage(message: string): string {
 
   return result;
 }
-console.log(sendMessage("Hey"));
+console.log(sendMessage("Hey yey"));
 //4433999
 // console.log(sendMessage('5-5-5-'))
