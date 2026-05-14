@@ -5,9 +5,12 @@
 // The returned format must be correct in order to complete this challenge.
 
 // Don't forget the space after the closing parentheses!
-
 export function createPhoneNumber(numbers: number[]) {
-  const regex = /^[0-9]{3}:[0-9]{3}:[0-9]{4}$/gmi
-  return '0784961277'.match(/^[0-9]{3}[0-9]{3}/gm)
+  // const regex = /^[0-9]{3} [0-9]{3} [0-9]{4}$/gmi
+  // return '0784961277'.match(regex)
+
+  const num = numbers.join('')
+  return `(${num.slice(0,3)}) ${num.slice(3,6)}-${num.slice(6,10)}`
+
 }
 console.log(createPhoneNumber([1, 2, 3, 4, 5, 6, 7, 8, 9, 0]))
