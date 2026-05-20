@@ -26,5 +26,20 @@
 
 // So the expected result is [960, 480, 60].
 function binMul(m, n) {
-  return [];
+  let arr = []
+  let start = m
+  let curr= n
+ 
+  while(start>=0){
+    if(start%2 === 0){
+      start = Math.floor(start/2)
+      curr *= 2
+    }
+      start = Math.floor(start/2)
+      curr *= 2
+      arr.push(curr)
+    
+  }
+  return arr
 }
+console.log(binMul(100,15))
