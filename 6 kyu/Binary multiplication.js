@@ -26,29 +26,23 @@
 
 // So the expected result is [960, 480, 60].
 function binMul(m, n) {
-  let arr = []
-  let start
-  let curr
-  if(n>m){
-  start = n
-  curr= m
-  }else{
-       start = m
-   curr= n
-  }
-  while(start>0){
-    if(start%2 === 0){
-      start = Math.floor(start/2)
-      curr *= 2
-    }else{
-      start = Math.floor(start/2)
-      const add = arr.every(item => item === curr) ? curr:curr *= 2 
-      arr.push(add)
+  let arr = [];
+  let start = Math.max(m, n);
+  let curr = Math.min(m, n);
+
+  while (start > 0) {
+    if (start % 2 !== 0) {
+      arr.push(curr);
     }
-    
+    start = Math.floor(start / 2);
+    curr *= 2;
   }
-  return  arr.filter(a=> a>0).sort((a,b)=> b-a)
+
+ 
+  return arr.sort((a, b) => b - a);
 }
-console.log(binMul(100,15))
-// console.log(binMul(15,0))
-// console.log(binMul(15, 100))
+
+console.log(binMul(100, 15)); // [960, 480, 60]
+console.log(binMul(15, 100)); // [960, 480, 60]
+console.log(binMul(15, 0));   // []
+console.log(binMul(0, 0));    // []
